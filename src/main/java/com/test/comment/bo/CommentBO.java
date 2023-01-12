@@ -1,8 +1,8 @@
-package com.test.like.bo;
+package com.test.comment.bo;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class LikeBO {
+public class CommentBO {
 
 }
