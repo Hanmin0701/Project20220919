@@ -22,18 +22,26 @@
 </head>
 <body>
 	<div id="wrap">
+		<h1>로그인</h1>
 		<!-- header -->
 		<header class="bg-danger">
-			<jsp:include page="../include/header.jsp"/> <!-- 상대 경로 ~> ./ ~> 폴더 하나를 위로 올라간다. -->
+			<jsp:include page="../include/header_signIn.jsp"/> 
 		</header>
 		
 		<!-- section -->
 		<section class="contents bg-info">
-			<jsp:include page="../${viewName}.jsp"/>
+			<jsp:include page="../${viewSignIn}.jsp"/>
 		</section>
 		<footer class="bg-primary">
-			<jsp:include page="../include/footer.jsp"/>
+			<jsp:include page="../include/footer_signIn.jsp"/>
 		</footer>
 	</div>
+<script>
+	$(document).ready(function() {
+	   $()
+		
+	});    	
+</script>
+	
 </body>
 </html>
