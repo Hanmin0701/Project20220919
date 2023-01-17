@@ -33,7 +33,7 @@
 			<jsp:include page="../${viewSignIn}.jsp"/>
 		</section>
 		<footer class="bg-primary">
-			<jsp:include page="../include/footer_signIn.jsp"/>
+			<jsp:include page="../include/footer.jsp"/>
 		</footer>
 	</div>
 <script type="text/javascript">
