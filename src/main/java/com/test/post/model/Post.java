@@ -6,12 +6,13 @@ public class Post {
 	
 	private int id;
 	private int userId;
+	private String subject;
 	private String content;
 	private String imagePath;
 	private Date createdAt;
 	private Date updatedAt;
 	
-	//getters, setters
+	// getters ans setters
 	public int getId() {
 		return id;
 	}
@@ -23,6 +24,12 @@ public class Post {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	public String getContent() {
 		return content;

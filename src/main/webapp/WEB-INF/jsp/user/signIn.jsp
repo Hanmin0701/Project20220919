@@ -27,3 +27,41 @@
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() { 
+		$('#loginForm').on('submit', function(e){
+			// 서브밋 기능 중단
+			e.preventDefault();
+			
+			// validation
+			// return false;
+			let loginId = $('input[name=loginId]').val().trim();
+			let password = $('input[name=password]').val();
+			
+			if (loginId == "") {
+				alert("아이디를 입력하세요.");
+				return false;
+			}
+			
+			if (password == "") {
+				alert("비밀번호를 입력하세요.");
+				return false;
+			}
+			
+			// ajax
+			let url = $(this).attr('action');
+			console.log();
+			let params = $(this).serialize(); // loginId=aaaa&password=aaaa
+			console.log();
+			
+			$.post(url, params); // request
+			.done(function(data) { // response
+				if(data.code == 1) { // 성공
+					document.location.href="/post/post_list_view"; // 글 목록을 이동
+				} else { // 실패
+					alert(data.errorMessage);	
+				}
+		 	};
+		});
+	});
+</script>
