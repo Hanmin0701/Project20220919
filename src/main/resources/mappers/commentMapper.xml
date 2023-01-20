@@ -21,4 +21,19 @@
 			, NOW()			
 		)
 	</insert>
+	
+	<select id="selectCommentListByPostId" parameterType="int" resultType="com.test.comment.model.Comment">
+		SELECT 
+			`id`
+			, `userId`
+			, `postId`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+	</select>
+	
 </mapper>

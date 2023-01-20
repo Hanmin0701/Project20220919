@@ -53,4 +53,19 @@
 			`loginId` = #{loginId} 
 			AND `password` = #{password}		
 	</select>
+	
+	<select id="selectUserById" parameterType="int" resultType="com.test.user.model.User">
+		SELECT
+			`id`
+			, `LoginId`
+			, `password`
+			, `name`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user` 
+		WHERE
+			`Id` = #{userId} 
+	</select>
 </mapper>

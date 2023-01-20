@@ -2,6 +2,7 @@ package com.test.post.model;
 
 import java.sql.Date;
 
+// Entity: 테이블에서 바로 가져온 값(가공되지 않음)
 public class Post {
 	
 	private int id;

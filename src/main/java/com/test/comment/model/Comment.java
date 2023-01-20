@@ -2,11 +2,12 @@ package com.test.comment.model;
 
 import java.sql.Date;
 
+// Entity
 public class Comment {
 	
 	private int id;
 	private int postId;
-	private String userId;
+	private int userId;
 	private String ImageUrl;
 	private String content;
 	private Date createdAt;
@@ -25,10 +26,10 @@ public class Comment {
 	public void setPostId(int postId) {
 		this.postId = postId;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getImageUrl() {
