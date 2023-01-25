@@ -25,15 +25,20 @@ public class likeRestController {
 	public Map<String, Object> like(
 			@PathVariable int postId, HttpSession session) {
 		
-		Like like = likeBO.addLike(postId);
-		
 		Map<String, Object> result = new HashMap<>();
 		
-		if (like != null) {
-			// 하트
-		} else {
-			// 빈칸 하트
+		Integer userId = (Integer) session.getAttribute("userId");
+		if (userId == null) {
+			result.put("code", 500); // 비로그인
+			result.put("errorMessage", "로그인을 해주세요");
+			return result;
 		}
+		
+		// 좋아요 있으면 삭제 / 없으면 추가
+		likeBO.likeToggle(postId, userId);
+		
+		result.put("code", 1); // 성공
+		result.put("result", "성공");
 		
 		return result;
 	}

@@ -6,6 +6,7 @@ public class Like {
 	
 	private int userId; 
 	private int postId;
+	
 	public int getUserId() {
 		return userId;
 	}

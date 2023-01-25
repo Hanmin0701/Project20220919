@@ -48,10 +48,20 @@
 				
 				<%-- 좋아요 --%>
 				<div class="card-like m-3">
+					<%-- 좋아요가 되어 있을 떄 --%>
+					<c:if test="${card.filedLike eq true}">
 					<a href="#" class="like-btn">
-					<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="empty heart">
-						좋아요 10개
+						<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="filled heart">
 					</a>
+					</c:if>
+					
+					<%-- 좋아요가 해제되어 있을 때 --%>
+					<c:if test="${card.filedLike eq false}">
+					<a href="#" class="like-btn">
+						<img src="https://www.iconninja.com/files/214/518/441/heart-icon.png" width="18" height="18" alt="empty heart">
+					</a>
+					</c:if>
+					좋아요 ${card.likeCount}개
 				</div>
 				
 				<%-- 글 --%>
@@ -206,6 +216,37 @@ $(document).ready(function() {
 				var errorMsg = jqXHR.responseJSON.status;
 				alert(errorMsg + ":" + textStatus);
 			}
+		});
+		
+		// 좋아요 
+		$('.like-btn').on('click', function('post-id'){
+			e.preventDefault();
+			
+			let userId = $(this).data('user-id');
+			
+			if (userId == '') {
+				alert("로그인을 해주세요");
+				return;
+			}
+			
+			let postId = $(this).data('post-id');
+			
+			$.ajax({
+				// request				
+				,url:"/like/" + postId
+
+				// response
+				,success: function(data) {
+					if (data.code == 1) {
+						location.reload(true);
+						
+					} else if (data.code == 500) {
+						alert(data.errorMessage);
+					}
+				}
+				,error: function(e) {
+					alert("좋아요/해제 하는데 실패했습니다.")
+				}
 		});
 	});
 });

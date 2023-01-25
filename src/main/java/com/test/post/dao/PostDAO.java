@@ -22,7 +22,15 @@ public interface PostDAO {
 	public List<Post> selectPostListByUserId(int userId);
 	
 	public Post selectPostByPostIdUserId(
-			@Param("userId") int userId, @Param("postId") int postId);
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
 	
 	public List<Post> selectPostList();
+	
+	public void updatePostByPostIdUserId(
+			@Param("postId") int postId, 
+			@Param("userId") int userId,
+			@Param("subject") String subject, 
+			@Param("content") String content, 
+			@Param("imagePath") String imagePath);
 }
