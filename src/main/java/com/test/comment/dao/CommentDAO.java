@@ -19,4 +19,7 @@ public interface CommentDAO {
 	public List<Comment> selectCommentListByPostId(int postId);
 	
 	public List<CommentView> generateCommentViewListByPostId(int postId);
+	
+	// 댓글 삭제
+	public void deleteCommentsByPostId(int postId);
 }

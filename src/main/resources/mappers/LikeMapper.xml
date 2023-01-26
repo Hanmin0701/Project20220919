@@ -49,6 +49,7 @@
  		)
 	</insert>
 	
+	<!-- 좋아요 삭제 -->
 	<delete id="deleteLikeByPostIdUserId" parameterType="map">
 		DELETE
 		FROM
@@ -56,5 +57,15 @@
 		WHERE
 			`postId` = #{postId}
 			AND `userId` = #{userId}
+	</delete>
+	
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteLikeByPostId" parameterType="int">
+		DELETE
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
 	</delete>
 </mapper>

@@ -56,7 +56,7 @@ public class fileManagerService {
 			try {
 				Files.delete(path);
 			} catch(IOException e) {
-				logger.error("이미지삭제] 이미지 삭제 실패. imagePath:{}", imagePath);
+				logger.error("[이미지삭제] 이미지 삭제 실패. imagePath:{}", imagePath);
 			}
 			// directory(폴더) 삭제
 			path = path.getParent();
@@ -64,7 +64,7 @@ public class fileManagerService {
 				try {
 					Files.delete(path);
 				} catch(IOException e) {
-					logger.error("이미지삭제] 디렉토리 삭제 실패. imagePath:{}", imagePath);
+					logger.error("[이미지삭제] 디렉토리 삭제 실패. imagePath:{}", imagePath);
 				}
 			}
 		}

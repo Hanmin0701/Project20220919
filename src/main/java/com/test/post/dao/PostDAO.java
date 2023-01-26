@@ -27,10 +27,19 @@ public interface PostDAO {
 	
 	public List<Post> selectPostList();
 	
+	// 글 수정
 	public void updatePostByPostIdUserId(
 			@Param("postId") int postId, 
 			@Param("userId") int userId,
 			@Param("subject") String subject, 
 			@Param("content") String content, 
 			@Param("imagePath") String imagePath);
+	
+	// 글 삭제
+	public int deletePostByPostIdUserId(
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
+	
+	// 댓글 삭제
+	public void deleteCommentByPostId(int postId);
 }

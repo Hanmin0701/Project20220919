@@ -81,4 +81,22 @@
 			`id` = #{postId}
 			AND `userId` = #{userId}
 	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deletePostByPostIdUserId">
+		DELETE FROM 
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deletePostByPostIdUserId">
+		DELETE FROM 
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
+	</delete>
 </mapper>

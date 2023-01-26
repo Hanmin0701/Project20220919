@@ -35,10 +35,12 @@
 				<div class="p-2 d-flex justify-content-between">
 					<span class="font-weight-bold">${card.user.loginId}</span>
 					
-					<%-- 더보기 --%>
-					<a href="#" class="more-btn">
+					<%-- 더보기(내가 쓴 글일 때만 노출) --%>
+					<c:if test="${userId eq card.user.id}">
+					<a href="#" class="more-btn" data-toggle="modal" data-target="#modal" data-post-id="${card.post.id}">
 						<img src="https://www.iconninja.com/files/860/824/939/more-icon.png" width="30">
 					</a>
+					</c:if>
 				</div>
 				
 				<%-- 카드 이미지 --%>
@@ -107,7 +109,29 @@
 		<%--// 타임라인 영역 끝  --%>
 	</div>
 </div>
-<script>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" data-post-id>
+	<%-- modal-sm: 작은 모달 창 --%>
+	<%-- modal-dialog-centered: 수직으로 가운데 정렬 --%>
+	<div class="modal-dialog modal-sm modal-dialog-centered">
+		<div class="modal-content text-center">
+			<div class="py-3 border-bottom">
+				<a herf="#" id="deletePostBtn">삭제하기</a>    
+			</div>
+			<div class="py-3">
+				<%-- data-dismiss="modal": 얘를 추가하면 모달창이 닫힌다.  --%>
+				<a herf="#" data-dismiss="modal">취소하기</a>    
+			</div>
+		</div>
+	</div>
+</div>
+  
 <script>
 $(document).ready(function() {
 	// 파일업로드 이미지 클릭 => 숨겨져있는 file을 동작시킴
@@ -249,6 +273,44 @@ $(document).ready(function() {
 				}
 		});
 	});
+		
+	// 더보기 버튼(...) 클릭 => (글 삭제를 위해서)
+	$('.more-btn').on('click', function(e){
+		e.prventDefault();
+		
+		let postId = $(this).data('post-id');  // getting
+		alert(postId);
+		
+		$('#modal').data('post-id', postId);  // setting 모달 테그에 data-post-id를 심어 넣어준다.
+		
+	});
+	
+	// modal 안에 있는 삭제하기 버튼 클릭
+	$('#modal deletePostBtn').on('click', function(){
+		e.preventDefault();
+		
+		let postId = $('#modal').data('post-id');
+		// alert(postId);
+		
+		// ajax 글 삭제
+		$.ajax({
+			type:"DELETE"
+			,url:"/post/delete"
+			, data:{"postId":postId}"
+			
+			, success function(data){
+				if (data.result == "성공") {
+					alert("삭제 되었습니다.");
+					location.href="/post/post_list_view"
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			
+			, error:function(e) {
+				alert("삭제하는데 실패했습니다. 다시 시도하시거나 관리자에게 문의해주세요.")
+			}
+		});
+	});
 });
-</script>
 </script>
