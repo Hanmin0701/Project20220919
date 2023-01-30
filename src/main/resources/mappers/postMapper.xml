@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+	<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
@@ -24,6 +24,7 @@
 		, NOW()
 	)
 	</insert>
+	
 	<select id="selectPostListByUserId" parameterType="int" resultType="com.test.post.model.Post">
 		SELECT 
 			`id`
@@ -38,7 +39,32 @@
 		WHERE
 			`userId` = #{userId}
 		ORDER BY `id` DESC
+		</if>
+		<if test="direction == 'next'">
+			<![CDATA[
+			AND `id` <  #{standardId}
+			]]>
+		ORDER BY `id` DESC
+		</if>
+		<if test="direction == 'prev'">
+			<![CDATA[
+			AND `id` >  #{standardId}
+			]]>
+		</if>
+		LIMIT ${limit}
 	</select>
+	
+	<select id="selectPostIdByUserIdSort" parameterType="map" resultType="int">
+		SELECT
+			`id`
+		FROM
+			`post`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `id` ${sort}
+		LIMIT 1
+	</select>
+	
 	<select id="selectPostByPostIdUserId" parameterType="map" resultType="com.test.post.model.Post">
 		SELECT 
 			`id`
@@ -51,21 +77,9 @@
 		FROM 
 			`post`
 		WHERE
-			`userId` = #{userId} AND `id` = #{postId}
+			`userId` = #{userId}
+			AND `id` = #{postId}
 	</select>
-	
-	<select id="selectPostList" resultType="com.sns.post.model.Post">
-		SELECT
-			`id`
-			,`userId`
-			,`content`
-			,`imagePath`
-			,`createdAt`
-			,`updatedAt`
-		FROM
-			`post`
-		ORDER BY `id` DESC
-	</select>	
 	
 	<update id="updatePostByPostIdUserId" parameterType="map">
 		UPDATE `post`
